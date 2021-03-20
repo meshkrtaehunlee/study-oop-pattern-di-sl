@@ -2,6 +2,7 @@ package di.ui;
 
 import di.transcoder.JobData;
 import di.transcoder.JobQueue;
+import di.transcoder.Locator;
 import java.util.Scanner;
 
 public class JobCLI {
@@ -10,7 +11,7 @@ public class JobCLI {
     String source = getSourceFromConsole();
     printInputTargetMessage();
     String target = getTargetFromConsole();
-    JobQueue jobQueue = null;
+    JobQueue jobQueue = Locator.getInstance().getJobQueue();
     jobQueue.addJob(new JobData(source, target));
   }
 
