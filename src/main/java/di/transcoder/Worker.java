@@ -11,6 +11,21 @@ public class Worker implements Runnable {
     this.transcoder = transcoder;
   }
 
+  public void configure(JobQueue jobQueue, Transcoder transcoder) {
+    this.jobQueue = jobQueue;
+    this.transcoder = transcoder;
+  }
+
+  public Worker setJobQueue(JobQueue jobQueue) {
+    this.jobQueue = jobQueue;
+    return this;
+  }
+
+  public Worker setTranscoder(Transcoder transcoder) {
+    this.transcoder = transcoder;
+    return this;
+  }
+
   @Override
   public void run() {
     while(true) {

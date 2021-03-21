@@ -13,6 +13,10 @@ public class JobCLI {
     this.jobQueue = jobQueue;
   }
 
+  public void setJobQueue(JobQueue jobQueue) {
+    this.jobQueue = jobQueue;
+  }
+
   public void interact() {
     while(true) {
       printInputSourceMessage();
