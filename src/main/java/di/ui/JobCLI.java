@@ -6,13 +6,17 @@ import di.transcoder.Locator;
 import java.util.Scanner;
 
 public class JobCLI {
+  private static final String EXIT_CODE = "exit";
   public void interact() {
-    printInputSourceMessage();
-    String source = getSourceFromConsole();
-    printInputTargetMessage();
-    String target = getTargetFromConsole();
-    JobQueue jobQueue = Locator.getInstance().getJobQueue();
-    jobQueue.addJob(new JobData(source, target));
+    while(true) {
+      printInputSourceMessage();
+      String source = getSourceFromConsole();
+      if(EXIT_CODE.equals(source)) return;
+      printInputTargetMessage();
+      String target = getTargetFromConsole();
+      JobQueue jobQueue = Locator.getInstance().getJobQueue();
+      jobQueue.addJob(new JobData(source, target));
+    }
   }
 
   private String getTargetFromConsole() {
@@ -21,6 +25,7 @@ public class JobCLI {
   }
 
   private String getSourceFromConsole() {
+    System.out.printf("종료 시 \"%s\" 입력", EXIT_CODE);
     Scanner scanner = new Scanner(System.in);
     return scanner.next();
   }
