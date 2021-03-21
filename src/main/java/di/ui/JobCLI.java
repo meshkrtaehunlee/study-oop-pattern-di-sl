@@ -11,7 +11,7 @@ public class JobCLI {
     while(true) {
       printInputSourceMessage();
       String source = getSourceFromConsole();
-      if(EXIT_CODE.equals(source)) return;
+      if(EXIT_CODE.equalsIgnoreCase(source)) return;
       printInputTargetMessage();
       String target = getTargetFromConsole();
       JobQueue jobQueue = Locator.getInstance().getJobQueue();
@@ -25,7 +25,6 @@ public class JobCLI {
   }
 
   private String getSourceFromConsole() {
-    System.out.printf("종료 시 \"%s\" 입력", EXIT_CODE);
     Scanner scanner = new Scanner(System.in);
     return scanner.next();
   }
@@ -35,6 +34,6 @@ public class JobCLI {
   }
 
   private void printInputSourceMessage() {
-    System.out.println("target 입력:");
+    System.out.printf("target 입력:(종료 시 \"%s\" 입력)\n", EXIT_CODE);
   }
 }
