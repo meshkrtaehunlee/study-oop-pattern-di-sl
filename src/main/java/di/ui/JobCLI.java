@@ -7,6 +7,12 @@ import java.util.Scanner;
 
 public class JobCLI {
   private static final String EXIT_CODE = "exit";
+  private JobQueue jobQueue;
+
+  public JobCLI(JobQueue jobQueue) {
+    this.jobQueue = jobQueue;
+  }
+
   public void interact() {
     while(true) {
       printInputSourceMessage();
@@ -14,7 +20,9 @@ public class JobCLI {
       if(EXIT_CODE.equalsIgnoreCase(source)) return;
       printInputTargetMessage();
       String target = getTargetFromConsole();
-      JobQueue jobQueue = Locator.getInstance().getJobQueue();
+      // 기존의 Locator에서는 Transcoder 타입의 의존까지 존재했기 때문에 불필ㄷ요한 의존이 발생했지만
+      // 편-안
+      // JobQueue jobQueue = Locator.getInstance().getJobQueue();
       jobQueue.addJob(new JobData(source, target));
     }
   }

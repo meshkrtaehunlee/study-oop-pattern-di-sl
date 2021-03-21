@@ -20,15 +20,12 @@ public class Main {
     JobQueue jobQueue = new FileJobQueue();
     Transcoder transcoder = new FfmpegTranscoder();
 
-    // 각 객체 간의 의존 관계 설정, 고수준 모듈이 저수준 모듈을 사용할 수 있도록 콘크리트 클래스 초기화
-    Locator locator = new Locator(jobQueue, transcoder);
-    Locator.init(locator);
-
+    // 각 객체 간의 의존 관계 설정, 고수준 모듈이 저수준 모듈을 사용할 수 있도록 콘크리트 클래스 주입
     // 애플리케이션 영역 실행
-    final Worker worker = new Worker();
+    final Worker worker = new Worker(jobQueue, transcoder);
     Thread t = new Thread(worker);
     t.start();
-    JobCLI cli = new JobCLI();
+    JobCLI cli = new JobCLI(jobQueue);
     cli.interact();
   }
 
